@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +35,30 @@
   to {
     transform: rotate(360deg);
   }
+} */
+
+
+/* Theme Toggle Buttons */
+
+
+.round-button {
+  height: 40px; /* Adjust height as needed */
+  width: 100px; /* Adjust width as needed */
+  border-radius: 0%; /* Make the button round */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
 }
+
+/* Active theme style */
+.round-button.activeTheme {
+  border: 2px solid #1365DF; /* Adjust border color for active theme */
+}
+
+/* Additional styling for theme buttons */
+.round-button {
+  margin-right: 5px; /* Add some margin between buttons */
+}
+
+

@@ -1,25 +1,73 @@
-import logo from './logo.svg';
 import './App.css';
+import React, {useState} from 'react'
+import About from './components/About';
+import NavBar from './components/NavBar';
+import TextForm from './components/TextForm';
+import Alerts from './components/Alerts';
+
+import {
+  BrowserRouter as Router,
+  Switch,
+  Routes,
+  Route,
+  Link
+} from "react-router-dom";
+
+
 
 function App() {
+  const [mode, setMode] = useState('light');
+  const [alert, setAlert] = useState(null);
+
+
+  const showAlert = (message, type) => {
+      setAlert({
+        msg: message,
+        type: type
+      }) 
+      setTimeout(() => {
+          setAlert(null);
+      },1500);
+  }
+
+  const toggleMode = () => {
+    if (mode=== 'light') {
+      setMode('dark');
+      document.body.style.backgroundColor ='#042743';
+      showAlert("Dark Mode has been Enabled", "success");
+    }
+    else{
+      setMode('light');
+      document.body.style.backgroundColor ='white';
+      showAlert("Light Mode has been Enabled", "success");
+    }
+  }
+
+  
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <Router>
+    <>
+    <NavBar title="TextUtils" mode={mode} toggleMode={toggleMode}/>
+    <Alerts alert={alert}/>
+
+    
+    
+    <div className='container'>
+    <Routes>
+
+          <Route path="/about" element={<About mode={mode}/>} />
+        
+          <Route path="/" element = {<TextForm showAlert={showAlert} heading="Try TextUtils - Word Counter | Character Counter 
+               | Lowercase to Upper Case | Uppercase to Lowercase | Remove Vowels | Reverse Text" mode={mode} />} />
+
+    </Routes>
     </div>
+    </>
+    </Router>
   );
+  
 }
 
 export default App;
+
